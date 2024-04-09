@@ -10,5 +10,5 @@ pub fn run(input: String, args: Args) -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::*:
+    use super::*;
 }
