@@ -30,7 +30,7 @@ Using the GitHub CLI you will create the new repo on GitHub which then has to be
 Run these commands to create a new repo with this template:
 
 ```sh
-gh repo create --template Skyppex/rust-cli-tool-template --clone
+gh repo create reponame --template Skyppex/rust-cli-tool-template --clone
 cd reponame
 ```
 
