@@ -66,6 +66,12 @@ fn get_path(path: &str) -> Result<PathBuf>{
         p if p.starts_with("~") => {
             dirs::home_dir().ok_or(std::io::Error::from(ErrorKind::NotFound))?.join(&p[2..])
         },
+        p if p.starts_with("..") => {
+            get_path(std::env::current_dir()?.parent()
+                .ok_or(io::Error::from(ErrorKind::NotFound))?
+                .join(&p[3..]).to_str()
+                .ok_or(io::Error::from(ErrorKind::InvalidData))?)?
+        },
         p if p.starts_with(".") => {
             std::env::current_dir()?.join(&p[2..])
         },
