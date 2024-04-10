@@ -1,14 +1,10 @@
 use crate::args::Args;
 
 pub fn run(input: String, args: Args) -> String {
-    let mut output = String::new();
-
-    // Your code here
-
-    output
+    todo!("Write the program logic here");
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    
 }
