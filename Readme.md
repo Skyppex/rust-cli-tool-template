@@ -30,8 +30,14 @@ Using the GitHub CLI you will create the new repo on GitHub which then has to be
 Run these commands to create a new repo with this template:
 
 ```sh
-gh repo create reponame --template Skyppex/rust-cli-tool-template --clone
+gh repo create reponame --public --template Skyppex/rust-cli-tool-template --clone
 cd reponame
 ```
 
-Run `gh repo create -h` to see some additional options to pass. Some useful ones are: `--public or --private`, `--add-readme`, `--description(-d): string`, `--gitignore(-g): string`. There are many more options to pick from :D
+Run `gh repo create -h` to see some additional options to pass. Some useful ones are: `--add-readme`, `--description(-d): string`, `--gitignore(-g): string`. There are many more options to pick from :D
+
+### Make changes
+
+Change this readme file to describe your tool rather than the template.
+
+Get coding!
