@@ -1,8 +1,9 @@
-use clap::Parser;
+use clap::{ArgGroup, Parser};
 
 /// Write a concise description of the command here.
 #[derive(Debug, Clone, Parser)]
-#[command(version, author)]
+#[command(version, author, about)]
+#[command(group=ArgGroup::new("log").multiple(false))]
 pub struct Args {
     /// The source file to read from. If not provided, read from stdin.
     #[arg(short, long)]
@@ -11,4 +12,13 @@ pub struct Args {
     /// The destination file to write to. If not provided, write to stdout.
     #[arg(short, long)]
     pub destination: Option<String>,
+
+    /// Enable verbose logging.
+    #[arg(short, long, group = "log")]
+    pub verbose: bool,
+
+    /// Suppress all informational output.
+    /// Errors will still be printed to stderr.
+    #[arg(short, long, group = "log")]
+    pub quiet: bool,
 }
