@@ -27,10 +27,17 @@ pub fn get_path(path: &str) -> Result<PathBuf>{
 
             current_dir.join(path)
         },
-        p if p.starts_with(".") => {
+        p if p.starts_with("./") || p.starts_with(".\\") => {
             std::env::current_dir()?.join(&p[2..])
         },
-        p => Path::new(&p).to_path_buf(),
+        p => {
+            let path = Path::new(p);
+            if !Path::has_root(path) {
+                return Ok(std::env::current_dir()?.join(&p))
+            }
+
+            path.to_path_buf()
+        },
     };
 
     Ok(path)
@@ -46,6 +53,16 @@ mod tests {
         let binding = get_path(&path).unwrap();
         let full_path = binding.to_str().unwrap();
         let binding = dirs::home_dir().unwrap().join(".cargo");
+        let expected = binding.to_str().unwrap();
+        assert_eq!(full_path, expected);
+    }
+
+    #[test]
+    fn test_get_full_path_from_base_less() {
+        let path = ".cargo".to_string();
+        let binding = get_path(&path).unwrap();
+        let full_path = binding.to_str().unwrap();
+        let binding = std::env::current_dir().unwrap().join(".cargo");
         let expected = binding.to_str().unwrap();
         assert_eq!(full_path, expected);
     }
